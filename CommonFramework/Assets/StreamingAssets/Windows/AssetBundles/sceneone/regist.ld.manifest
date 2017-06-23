@@ -1,0 +1,23 @@
+ManifestFileVersion: 0
+CRC: 4030930913
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 477cc8e974e888972a2e213b70977632
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 0520077050483de6babb9bd310d40764
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/Art/Scenes/SceneOne/Regist/Textrue/Money.png
+- Assets/Art/Scenes/SceneOne/Regist/Textrue/PlayerM.mat
+- Assets/Art/Scenes/SceneOne/Regist/Textrue/Heard.png
+- Assets/Art/Scenes/SceneOne/Regist/Textrue/Flash.png
+Dependencies: []
