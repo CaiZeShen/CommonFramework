@@ -16,6 +16,10 @@ public class AssetBundleEditor {
     public static void BuildeAssetBundle() {
         string outPath = IPathTools.GetAssetBundlePath();
 
+        if (!Directory.Exists(outPath)) {
+            Directory.CreateDirectory(outPath);
+        }
+
         BuildPipeline.BuildAssetBundles(outPath, 0, EditorUserBuildSettings.activeBuildTarget);
 
         AssetDatabase.Refresh();
@@ -39,6 +43,7 @@ public class AssetBundleEditor {
             }
         }
 
+        CopyRecord(path, IPathTools.GetAssetBundlePath());
         AssetDatabase.Refresh();
     }
 
@@ -48,11 +53,38 @@ public class AssetBundleEditor {
         return path;
     }
 
+    // 拷贝源目录下所有的txt文件到指定路径
+    private static void CopyRecord(string sourcePath,string disPath) {
+        DirectoryInfo dir = new DirectoryInfo(sourcePath);
+        if (!dir.Exists) {
+            Debug.Log("is not exist!");
+            return;
+        }
+
+        if (!Directory.Exists(disPath)) {
+            Directory.CreateDirectory(disPath);
+        }
+
+        FileSystemInfo[] files = dir.GetFileSystemInfos();
+        for (int i = 0; i < files.Length; i++) {
+            FileInfo file = files[i] as FileInfo;
+
+            // 对文件的操作
+            if (file!=null && file.Extension==".txt") {
+                string sourFile = Path.Combine(sourcePath, file.Name);
+                string disFile = Path.Combine(disPath, file.Name);
+
+                File.Copy(sourFile, disFile, true);
+            }
+        }
+    }
+
     // 对整个场景文件夹进行遍历
     private static void SceneOverView(string scenePath) {
         // 这里用读写字符串的方式，应该改成读写二进制
-        string textFileName = "Record.txt";
-        string tempPath = scenePath + textFileName;
+        string tempPath = scenePath+"Record.txt";
+        Debug.Log("RecordPath = " + tempPath);
+
         FileStream fs = new FileStream(tempPath, FileMode.OpenOrCreate);
         StreamWriter bw = new StreamWriter(fs);
 
@@ -104,7 +136,7 @@ public class AssetBundleEditor {
             FileInfo file = files[i] as FileInfo;
             if (file != null) {  // 文件的操作
                 ChangeMark(file, replacePath, theWriter);
-            } else {            // 目录的操作
+            } else {            // 目录的操作(递归)
                 ListFiles(files[i], replacePath, theWriter);
             }
         }
@@ -117,7 +149,7 @@ public class AssetBundleEditor {
         }
 
         string markStr = GetBundlePath(tmpFile, replacePath);
-        Debug.Log("markStr == " + markStr);
+        //Debug.Log("markStr == " + markStr);
         ChangeAssetMark(tmpFile, markStr, theWriter);
     }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 using System;
+using System.IO;
 
 // ****************************************************************
 // 功能：包的依赖关系的管理
@@ -37,7 +38,12 @@ public class IABRelationManager {
         this.loadProgress = loadProgress;
         this.bundleName = bundleName;
         isLoadFinish = false;
+
         assetLoader = new IABLoader(loadProgress, OnBundleLoadFinish);
+        // 设置名字和路径
+        assetLoader.SetBundleName(bundleName);
+        string bundlePath = Path.Combine(IPathTools.GetWWWAssetBundlePath(), bundleName);
+        assetLoader.LoadResources(bundlePath);
     }
 
     /// <summary>

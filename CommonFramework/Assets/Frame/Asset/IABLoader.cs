@@ -8,7 +8,7 @@ public delegate void LoadFinish(string bundleName);
 public class IABLoader {
     private string bundleName;
     private string commonBundlePath;
-    private WWW commonLoader;
+    private WWW commonLoaderWWW;
     private float commonResLoaderProcess;
     private LoadProgress loadProgress;
     private LoadFinish loadFinish;
@@ -42,10 +42,10 @@ public class IABLoader {
     }
 
     public IEnumerator CommonLoad() {
-        commonLoader = new WWW(commonBundlePath);
+        commonLoaderWWW = new WWW(commonBundlePath);
 
-        while (!commonLoader.isDone) {
-            commonResLoaderProcess = commonLoader.progress;
+        while (!commonLoaderWWW.isDone) {
+            commonResLoaderProcess = commonLoaderWWW.progress;
 
             if (loadProgress!=null) {
                 loadProgress(bundleName, commonResLoaderProcess);
@@ -57,8 +57,14 @@ public class IABLoader {
             //commonResLoaderProcess = commonLoader.progress;
         }
 
-        // 是否加载完
-        if (commonResLoaderProcess>=1.0f) {
+        
+        if (commonResLoaderProcess>=1.0f) { // 加载完成
+
+            abResLoader = new IABResLoader(commonLoaderWWW.assetBundle);
+
+            if (loadProgress!=null) {
+                loadProgress(bundleName, commonResLoaderProcess);
+            }
 
             if (loadFinish != null) {
                 loadFinish(bundleName);
@@ -67,7 +73,7 @@ public class IABLoader {
             Debug.LogError("Load Bundle Error = " + bundleName);
         }
 
-        commonLoader = null;
+        commonLoaderWWW = null;
     }
 
     #region 下层提供的功能
@@ -101,7 +107,7 @@ public class IABLoader {
     /// 调试
     /// </summary>
     public void DebugLoader() {
-        if (commonLoader != null) {
+        if (commonLoaderWWW != null) {
             abResLoader.DebugAllRes();
         }
     }

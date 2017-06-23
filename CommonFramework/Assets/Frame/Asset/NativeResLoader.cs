@@ -171,7 +171,7 @@ public class NativeResLoader : AssetBase {
             ILoaderManager.Instance.LoadAsset(sceneName, bundleName, OnLoadProgress);
 
             string bundleFullName = ILoaderManager.Instance.GetBundleReflectName(sceneName, bundleName);
-            if (bundleName != null) {
+            if (bundleFullName != null) {
                 NativeResCallBackNode tmpNode = new NativeResCallBackNode(isSingle, sceneName, bundleName, resName, backID, OnSendToBackMsg, null);
 
                 CallBackMgr.AddBundle(bundleFullName, tmpNode);
@@ -195,7 +195,7 @@ public class NativeResLoader : AssetBase {
             // 把命令存下来
 
             string bundleFullName = ILoaderManager.Instance.GetBundleReflectName(sceneName, bundleName);
-            if (bundleName != null) {
+            if (bundleFullName != null) {
                 NativeResCallBackNode tmpNode = new NativeResCallBackNode(isSingle, sceneName, bundleName, resName, backID, OnSendToBackMsg, null);
 
                 CallBackMgr.AddBundle(bundleFullName, tmpNode);

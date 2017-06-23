@@ -45,11 +45,29 @@ public class IPathTools {
 
     public static string GetAssetBundlePath() {
         string platFolder = GetPlatformFolderName(Application.platform);
-        string allPath = Path.Combine(GetAppFilePath(), platFolder);
-        allPath = Path.Combine(allPath, "AssetBundles");
-        return allPath;
+        return Path.Combine(GetAppFilePath(), platFolder);
     }
 
-   
+    public static string GetWWWAssetBundlePath() {
+        string tmpStr;
+
+        if (Application.platform==RuntimePlatform.WindowsEditor || Application.platform == RuntimePlatform.OSXEditor) {
+            tmpStr = "file:///" + GetAssetBundlePath();
+        } else {
+            tmpStr = GetAssetBundlePath();
+
+#if UNITY_ANDROID
+        tmpStr = "jar:file://" + tmpStr;
+#elif UNITY_STANDALONE_WIN
+            tmpStr = "file:///" + tmpStr;
+#else
+            tmpStr = "file:///" + tmpStr;
+#endif
+        }
+
+        return tmpStr;
+    }
+
+
 }
 

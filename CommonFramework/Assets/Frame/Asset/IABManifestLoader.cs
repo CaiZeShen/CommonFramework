@@ -12,7 +12,7 @@ public class IABManifestLoader {
     public AssetBundleManifest assetManifest;
     public AssetBundle manifestLoader;
     private static IABManifestLoader instance = null;
-    private string manifestPaht;
+    private string manifestPath;
     private bool isLoadFinish;
 
     public static IABManifestLoader Instance {
@@ -31,12 +31,14 @@ public class IABManifestLoader {
         }
     }
 
+    // 构造
     public IABManifestLoader() {
         assetManifest = null;
         manifestLoader = null;
         isLoadFinish = false;
 
-        manifestPaht = IPathTools.GetAssetBundlePath();
+        string manifestName = IPathTools.GetPlatformFolderName(Application.platform);
+        manifestPath = IPathTools.GetAssetBundlePath()+"/"+manifestName;
     }
 
     /// <summary>
@@ -44,11 +46,12 @@ public class IABManifestLoader {
     /// </summary>
     /// <param name="path"></param>
     public void SetManifestPath(string path) {
-        manifestPaht = path;
+        manifestPath = path;
     }
 
     public IEnumerator LoadManifest() {
-        WWW manifestWWW = new WWW(manifestPaht);
+        Debug.Log("manifestPath = "+manifestPath);
+        WWW manifestWWW = new WWW(manifestPath);
 
         yield return manifestWWW;
 
@@ -59,7 +62,7 @@ public class IABManifestLoader {
             // 加载成功
             if (manifestWWW.progress>=1.0f) {
                 manifestLoader = manifestWWW.assetBundle;
-                assetManifest = manifestLoader.LoadAsset("AssetBundles.manifest") as AssetBundleManifest;
+                assetManifest = manifestLoader.LoadAsset("AssetBundleManifest") as AssetBundleManifest;
                 isLoadFinish = true;
             }
         }
