@@ -11,6 +11,10 @@ public class MsgBase {
     // ushort 0~65535  两个字节
     public ushort msgID;
 
+    public MsgBase() {
+        msgID = 0;
+    }
+
     public MsgBase(ushort msgID) {
         this.msgID = msgID;
     }

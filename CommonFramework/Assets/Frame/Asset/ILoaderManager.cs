@@ -62,8 +62,6 @@ public class ILoaderManager:MonoBehaviour {
         }
     }
 
-    
-
     #region 由下层api提供
     /// <summary>
     /// 加载单个资源
