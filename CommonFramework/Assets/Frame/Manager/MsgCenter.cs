@@ -31,6 +31,7 @@ public class MsgCenter : MonoBase {
         // 其他模块
     }
 
+    // 消息分析
     private void AnalysisMsg(MsgBase msg) {
         ManagerID managerID = msg.GetManagerID();
         switch (managerID) {
