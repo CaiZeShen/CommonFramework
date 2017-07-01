@@ -8,7 +8,11 @@
 // ****************************************************************
 
 public enum AssetEvent {
-    HunkRes=ManagerID.AssetManager+1,
+    CheckLoadAssetsFinish = ManagerID.AssetManager + 1,
+    CheckLoad,
+
+    HunkRes,
+
     ReleaseSingleObj,
     ReleaseBundleObj,
     ReleaseSceneObj,
@@ -16,6 +20,8 @@ public enum AssetEvent {
     ReleaseSingleBundle,
     ReleaseSceneBundle,
     ReleaseAll,
+
+    MaxValue,
 }
 
 /// <summary>

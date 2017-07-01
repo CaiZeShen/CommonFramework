@@ -1,19 +1,19 @@
 -- 主要负责消息模块转发
-
 LMsgCenter = { msgID = 0};
 
-local  this = LMsgCenter;
+LMsgCenter.__index = LMsgCenter;
+
+local this = LMsgCenter;
 
 function LMsgCenter:New(msgID)
-    local o = {};
 
-    self.__index = self;
+    local self = {};
     
-    setmetatable(o,self);
+    setmetatable(self,LMsgCenter);
 
     self.msgID=msgID;
 
-    return o;
+    return self;
 end
 
 -- 单例
@@ -38,7 +38,7 @@ function LMsgCenter.AnalysisMsg(msg)
 	elseif managerID == LManagerID.LNetManager then
 
 	elseif managerID == LManagerID.LUIManager then
-
+            LUIManager.GetInstance():ProcessEvent(msg);
 	elseif managerID == LManagerID.LNPCManager then
 
 	elseif managerID == LManagerID.LCharactorManager then

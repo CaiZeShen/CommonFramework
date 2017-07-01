@@ -112,6 +112,7 @@ public class NativeResLoader : AssetBase {
             return resBackMsg;
         }
     }
+
     public NatvieResCallBackManager CallBackMgr {
         get {
             if (callBackMgr==null) {

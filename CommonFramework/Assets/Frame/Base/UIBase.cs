@@ -11,6 +11,10 @@ using UnityEngine;
 public class UIBase : MonoBase {
     protected ushort[] msgIDs;
 
+    public GameObject GetGameObject(string name) {
+        return UIManager.Instance.GetGameObject(name);
+    }
+
     public void RegistSelf(MonoBase mono,params ushort[] msgs) {
         UIManager.Instance.RegistMsg(mono, msgs);
     }

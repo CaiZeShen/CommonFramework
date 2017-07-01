@@ -144,6 +144,10 @@ public static class CustomSettings
         _GT(typeof(BlendWeights)),           
         _GT(typeof(RenderTexture)),
         _GT(typeof(Resources)),        
+
+        // CaiZeShen add
+
+        _GT(typeof(MLuaResLoader)),
     };
 
     public static List<Type> dynamicList = new List<Type>()

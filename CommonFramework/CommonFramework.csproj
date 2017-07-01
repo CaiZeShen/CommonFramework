@@ -92,6 +92,7 @@
     <Compile Include="Assets\Frame\Asset\IABResLoader.cs" />
     <Compile Include="Assets\Frame\Asset\IABSceneManager.cs" />
     <Compile Include="Assets\Frame\Asset\ILoaderManager.cs" />
+    <Compile Include="Assets\Frame\Asset\MLuaResLoader.cs" />
     <Compile Include="Assets\Frame\Asset\NativeResLoader.cs" />
     <Compile Include="Assets\Frame\Base\AssetBase.cs" />
     <Compile Include="Assets\Frame\Base\NPCBase.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Assets\Source\Generate\DelegateFactory.cs" />
     <Compile Include="Assets\Source\Generate\LuaBinder.cs" />
     <Compile Include="Assets\Source\Generate\LuaInterface_DebuggerWrap.cs" />
+    <Compile Include="Assets\Source\Generate\MLuaResLoaderWrap.cs" />
     <Compile Include="Assets\Source\Generate\UnityEngine_AnimationBlendModeWrap.cs" />
     <Compile Include="Assets\Source\Generate\UnityEngine_AnimationClipWrap.cs" />
     <Compile Include="Assets\Source\Generate\UnityEngine_AnimationStateWrap.cs" />

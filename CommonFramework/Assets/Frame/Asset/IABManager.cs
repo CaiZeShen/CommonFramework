@@ -21,6 +21,10 @@ public class AssetObj {
 
     public void ReleaseObj() {
         for (int i = 0; i < objs.Count; i++) {
+            if(objs[i] is GameObject) {
+                continue;
+            }
+
             Resources.UnloadAsset(objs[i]);
         }
     }
@@ -189,6 +193,38 @@ public class IABManager {
         }
 
         loadObjs.Clear();
+    }
+
+    /// <summary>
+    /// 删除单个包和包资源 并递归处理包的依赖关系
+    /// </summary>
+    /// <param name="bundleName"></param>
+    public void DisposeBundleAndObjs(string bundleName) {
+        if (loadHelper.ContainsKey(bundleName)) {
+            // 遍历包的所有依赖包
+            IABRelationManager loader = loadHelper[bundleName];
+            List<string> dependencies = loader.GetDependences();
+            for (int i = 0; i < dependencies.Count; i++) {
+
+                if (loadHelper.ContainsKey(dependencies[i])) {  // 当前依赖包存在内存
+                    // 删除和当前包的被依赖关系
+                    IABRelationManager currentRelationMgr = loadHelper[dependencies[i]];
+                    if (currentRelationMgr.RemoveReference(bundleName)) {   // 当前依赖包的被依赖关系为空（函数内部删除当前依赖包）
+                        // 删除当前依赖包的的依赖包（递归）
+                        DisposeBundle(currentRelationMgr.BundleName);
+                    }
+                }
+            }
+
+            // 当前包的被依赖关系为空时，删除当前包
+            if (loader.GetReference().Count <= 0) {
+                loader.Dispose();
+                loadHelper.Remove(bundleName);
+
+                // 删除包加载的assetbundle.load 出来的内存
+                DisposeResObj(bundleName);
+            }
+        }
     }
 
     /// <summary>

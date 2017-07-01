@@ -128,6 +128,19 @@ public class ILoaderManager:MonoBehaviour {
     }
 
     /// <summary>
+    /// 释放一个包和资源
+    /// </summary>
+    /// <param name="sceneName"></param>
+    /// <param name="bundleName"></param>
+    public void UnLoadAssetBundleAndObjs(string sceneName, string bundleName) {
+        if (sceneManagers.ContainsKey(sceneName)) {
+            IABSceneManager sceneMgr = sceneManagers[sceneName];
+
+            sceneMgr.DisposeBundleAndObjs(bundleName);
+        }
+    }
+
+    /// <summary>
     /// 释放所有包的资源
     /// </summary>
     /// <param name="sceneName"></param>

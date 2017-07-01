@@ -8,15 +8,19 @@
 
 LEventNode = { next = nil};
 
-function LEventNode:New(event)
-    local o = {};
+LEventNode.__index = LEventNode;
 
-    self.__index = self;
-    
-    setmetatable(o,self);
+function LEventNode:New(event)
+    local self = {};
+
+    setmetatable(self,LEventNode);
 
     self.value=event;
     self.next=nil;
 
-    return o;
+    return self;
 end
+
+   
+
+    

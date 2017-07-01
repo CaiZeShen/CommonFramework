@@ -2,16 +2,17 @@
 
 LMsgBase = { msgID = 0}
 
-function LMsgBase:New(msgID)
-    local o = {};
+LMsgBase.__index = LMsgBase;
 
-    self.__index = self;
+function LMsgBase:New(msgID)
+
+    local self = {};
     
-    setmetatable(o,self);
+    setmetatable(self,LMsgBase);
 
     self.msgID=msgID;
 
-    return o;
+    return self;
 end
 
 function LMsgBase:GetManager()

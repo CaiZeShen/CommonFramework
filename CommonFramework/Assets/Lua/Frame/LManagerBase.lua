@@ -5,18 +5,19 @@ eventTree = {},
 
 };
 
-local  this = LManagerBase;
+LManagerBase.__index = LManagerBase;
+
+local this = LManagerBase;
 
 function LManagerBase:New(msgID)
-    local o = {};
 
-    self.__index = self;
+    local self = {};
     
-    setmetatable(o,self);
+    setmetatable(self,LManagerBase);
 
     self.msgID=msgID;
 
-    return o;
+    return self;
 end
 
 -- 单例

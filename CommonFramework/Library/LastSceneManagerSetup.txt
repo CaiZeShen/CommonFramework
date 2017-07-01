@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/ToLua/Examples/01_HelloWorld/HelloWorld.unity
+- path: Assets/ToLua/Examples/03_CallLuaFunction/CallLuaFunction.unity
   isLoaded: 1
   isActive: 1

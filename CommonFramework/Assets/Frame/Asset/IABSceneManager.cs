@@ -155,6 +155,18 @@ public class IABSceneManager {
     }
 
     /// <summary>
+    /// 释放整个包和资源
+    /// </summary>
+    /// <param name="bundleName"></param>
+    public void DisposeBundleAndObjs(string bundleName) {
+        if (allAssets.ContainsKey(bundleName)) {
+            abManager.DisposeBundleAndObjs(allAssets[bundleName]);
+        } else {
+            Debug.LogWarning("Dont contains the bundle = " + bundleName);
+        }
+    }
+
+    /// <summary>
     /// 释放所有包
     /// </summary>
     public void DisposeAllBundles() {

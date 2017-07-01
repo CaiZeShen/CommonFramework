@@ -803,10 +803,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Lua\Frame\Define.lua" />
+    <Compile Include="Assets\Lua\Frame\LAssetBase.lua" />
+    <Compile Include="Assets\Lua\Frame\LAssetBundleLoader.lua" />
+    <Compile Include="Assets\Lua\Frame\LAssetEvent.lua" />
+    <Compile Include="Assets\Lua\Frame\LAssetManager.lua" />
+    <Compile Include="Assets\Lua\Frame\LAssetMsg.lua" />
     <Compile Include="Assets\Lua\Frame\LEventNode.lua" />
     <Compile Include="Assets\Lua\Frame\LManagerBase.lua" />
     <Compile Include="Assets\Lua\Frame\LMsgBase.lua" />
     <Compile Include="Assets\Lua\Frame\LMsgCenter.lua" />
+    <Compile Include="Assets\Lua\Frame\LUIBase.lua" />
+    <Compile Include="Assets\Lua\Frame\LUIManager.lua" />
     <Compile Include="Assets\Lua\Main.lua" />
     <Compile Include="Assets\ToLua\Examples\02_ScriptsFromFile\ScriptsFromFile.lua" />
     <Compile Include="Assets\ToLua\Lua\cjson\util.lua" />
