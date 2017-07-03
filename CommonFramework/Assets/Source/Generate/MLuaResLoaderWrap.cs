@@ -8,6 +8,12 @@ public class MLuaResLoaderWrap
 	{
 		L.BeginClass(typeof(MLuaResLoader), typeof(System.Object));
 		L.RegFunction("GetResoures", GetResoures);
+		L.RegFunction("UnLoadResObj", UnLoadResObj);
+		L.RegFunction("UnLoadBundleObjs", UnLoadBundleObjs);
+		L.RegFunction("UnLoadSingleBundle", UnLoadSingleBundle);
+		L.RegFunction("UnLoadBundleAndObjs", UnLoadBundleAndObjs);
+		L.RegFunction("UnLoadAllBundle", UnLoadAllBundle);
+		L.RegFunction("UnLoadAllBundleAndObjs", UnLoadAllBundleAndObjs);
 		L.RegFunction("New", _CreateMLuaResLoader);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("Instance", get_Instance, null);
@@ -52,6 +58,113 @@ public class MLuaResLoaderWrap
 			bool arg3 = LuaDLL.luaL_checkboolean(L, 5);
 			LuaFunction arg4 = ToLua.CheckLuaFunction(L, 6);
 			obj.GetResoures(arg0, arg1, arg2, arg3, arg4);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int UnLoadResObj(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 4);
+			MLuaResLoader obj = (MLuaResLoader)ToLua.CheckObject<MLuaResLoader>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			string arg1 = ToLua.CheckString(L, 3);
+			string arg2 = ToLua.CheckString(L, 4);
+			obj.UnLoadResObj(arg0, arg1, arg2);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int UnLoadBundleObjs(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			MLuaResLoader obj = (MLuaResLoader)ToLua.CheckObject<MLuaResLoader>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			string arg1 = ToLua.CheckString(L, 3);
+			obj.UnLoadBundleObjs(arg0, arg1);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int UnLoadSingleBundle(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			MLuaResLoader obj = (MLuaResLoader)ToLua.CheckObject<MLuaResLoader>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			string arg1 = ToLua.CheckString(L, 3);
+			obj.UnLoadSingleBundle(arg0, arg1);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int UnLoadBundleAndObjs(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 3);
+			MLuaResLoader obj = (MLuaResLoader)ToLua.CheckObject<MLuaResLoader>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			string arg1 = ToLua.CheckString(L, 3);
+			obj.UnLoadBundleAndObjs(arg0, arg1);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int UnLoadAllBundle(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			MLuaResLoader obj = (MLuaResLoader)ToLua.CheckObject<MLuaResLoader>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			obj.UnLoadAllBundle(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int UnLoadAllBundleAndObjs(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			MLuaResLoader obj = (MLuaResLoader)ToLua.CheckObject<MLuaResLoader>(L, 1);
+			string arg0 = ToLua.CheckString(L, 2);
+			obj.UnLoadAllBundleAndObjs(arg0);
 			return 0;
 		}
 		catch (Exception e)

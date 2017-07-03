@@ -35,6 +35,8 @@ function LManagerBase:ProcessEvent(msg)
 
             if  tmpNode.next ~= nil then
                 tmpNode = tmpNode.next;
+            else
+                tmpNode = nil;
             end
         end
 

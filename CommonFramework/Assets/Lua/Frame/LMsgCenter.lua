@@ -21,12 +21,27 @@ function LMsgCenter.GetInstance()
 	return this;
 end
 
+function LMsgCenter.Awake()
+    -- 与C#关联
+	LuaAndCMsgCenter.Instance:SettingLuaCallBack(this.OnRecvMsg);
+end
+
+this.Awake();
+
 function LMsgCenter.SendToMsg(msg)
 	this.AnalysisMsg(msg);
 end
 
-function LMsgCenter.RecvMsg(msg)
-	
+function LMsgCenter.OnRecvMsg(fromNet,arg0,arg1,arg2)
+	if fromNet == true then
+        local tmpMsg = LMsgBase:New(arg0);
+        tmpMsg.state = arg1;
+        tmpMsg.data = arg2;
+
+        this.AnalysisMsg(tmpMsg);
+    else
+        this.AnalysisMsg(arg0);
+    end
 end
 
 -- 分析消息
@@ -49,6 +64,9 @@ function LMsgCenter.AnalysisMsg(msg)
 
 	elseif managerID == LManagerID.LAudioManager then
 
+    else
+        -- 让c#的消息中心处理
+        MsgCenter.Instance:ProcessEvent(msg);
 	end
 	
 end
